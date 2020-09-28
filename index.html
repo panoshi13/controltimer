@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Control Timer</title>
+</head>
+
+<body>
+
+    <h1>Control Timer</h1>
+    <br><br><br>
+    <div class="container">
+        <div class="sidebar">
+            <h4>Time Records</h4>
+            <button type="submit" id="limpiar" onclick="location.reload()">Limpiar Tiempos</button>
+            <div id="historial"></div>
+        </div>
+        <div class="container-time-scramble">
+            <div class="scramble">
+                <span class="mezcla"></span>
+            </div>
+
+            <div class="tiempo">
+                <span id="minutos">00</span>:<span id="segundos">00</span>:<span id="milisegundos">00</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+        var historial = document.getElementById('historial')
+
+        var cronometro
+        var presionadoEspacio = false
+        var m = document.getElementById("minutos");
+        var s = document.getElementById("segundos");
+        var ms = document.getElementById("milisegundos");
+
+
+
+
+        document.getElementById("limpiar").addEventListener("click", function (event) {
+            // presentar la cuenta de clicks realizados sobre el elemento con id "prueba"
+            if ('time' in localStorage) {
+                localStorage.removeItem('time');
+            }
+        }, true);
+
+        function carga() {
+            s.innerHTML = 0;
+            contador_s = 0;
+            contador_m = 0;
+            contador_ms = 0;
+            cronometro = setInterval(function () {
+                if (contador_ms == 100) {
+                    contador_ms = 0;
+                    contador_s++;
+                    s.innerHTML = contador_s;
+                    if (contador_s == 60) {
+                        contador_s = 0;
+                        contador_m++;
+                        m.innerHTML = contador_m;
+                    }
+                }
+                ms.innerHTML = contador_ms;
+                contador_ms++;
+            }, 10);
+        }
+        const array = [];
+        var cadena
+
+        function detener() {
+            clearInterval(cronometro);
+            //console.log(m.innerText+":"+s.innerText+":"+ms.innerText);
+            var tiempo = m.innerText + ":" + s.innerText + ":" + ms.innerText;
+
+            if ('time' in localStorage) {
+                //array.push(localStorage.getItem('time'));
+                if (array.length === 0) {
+                    array.push(localStorage.getItem('time'))
+                    array.push(tiempo);
+                    localStorage.setItem('time', array);
+                    console.log(array);
+                } else {
+                    array.push(tiempo);
+                    localStorage.setItem('time', array);
+                    console.log(array);
+                }
+            } else {
+                array.push(tiempo);
+                localStorage.setItem('time', array);
+            }
+
+            cadena = localStorage.getItem('time');
+            var Tiemposs = cadena.replace(/,/g, "<br>");
+            historial.innerHTML = Tiemposs;
+        }
+        cadena = localStorage.getItem('time');
+        //console.log(localStorage.getItem('time'));
+        if (cadena != null) {
+            var Tiempos = cadena.replace(/,/g, "<p>");
+            historial.innerHTML = "<p>" + Tiempos;
+        }
+
+        function barajar(array) {
+            var currentIndex = array.length;
+            var temporaryValue, randomIndex;
+
+            // En cada iteración disminuimos el currentIndex, por lo que el bucle se realiza
+            // mientras sea diferente que 0
+            while (0 !== currentIndex) {
+
+                // Elige una posicion del array aleatoriamente
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // Ponemos el elemento seleccionado en la ultima posición del array (currentIndex)
+                // para que no puede volver a ser seleccionado
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
+        arr = ["R", "R'", "L", "L'", "D", "D'", "U", "U'", "F", "F'", "B", "B'", "R2", "L2", "D2", "U2", "F2", "B2"];
+        var mezcla = document.querySelector('.mezcla');
+        var cade = "";
+        barajar(arr).forEach(elemente => {
+            cade += elemente + " ";
+        });
+        mezcla.innerHTML = cade;
+
+        document.addEventListener('keyup', (event) => {
+            const keyName = event.code;
+            //Combrobamos que se esta presionando la tecla espacio
+            if (keyName == "Space") {
+                //scrambleamos cada vez que presionamos espacio
+                var cad = "";
+                barajar(arr).forEach(element => {
+                    cad += element + " ";
+                });
+                mezcla.innerHTML = cad;
+                //Se ejecuta el iniciar y pausar
+                if (!presionadoEspacio) {
+                    presionadoEspacio = true;
+                    carga();
+                } else {
+                    presionadoEspacio = false;
+                    contador_s = 0;
+                    detener();
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>

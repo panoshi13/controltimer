@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(45deg, #92baac 45px, transparent 45px) 64px 64px,
+    linear-gradient(
+      45deg,
+      #92baac 45px,
+      transparent 45px,
+      transparent 91px,
+      #6382d8 91px,
+      #6382d8 135px,
+      transparent 135px
+    ),
+    linear-gradient(
+      -45deg,
+      #92baac 23px,
+      transparent 23px,
+      transparent 68px,
+      #92baac 68px,
+      #92baac 113px,
+      transparent 113px,
+      transparent 158px,
+      #92baac 158px
+    );
+  background-color: #6382d8;
+  background-size: 128px 128px;
+  font-family: "Courier New", Courier, monospace;
+  height: 100vh;
+}
+.container{
+  display: flex;
+  justify-content: space-evenly;
+}
+.tiempo {
+  background-color: rgb(111, 230, 230);
+  font-size: 100px;
+  font-weight: 900;
+  font-style: normal;
+  width: 550px;
+  height: 103px;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+h1 {
+  text-align: center;
+  font-family: "Franklin Gothic Medium" !important;
+  font-size: 70px;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .tiempo {
+    width: 345px;
+    font-size: 70px;
+  }
+}
+
+#historial {
+  text-align: center;
+  height: 300px;
+  width: 250px;
+  border: 1px solid #ddd;
+  background: #e8e8e8;
+  overflow-y: scroll;
+  margin: 0px auto;
+  font-size: 25px;
+}
+
+.sidebar {
+  background-color: #51adcf;
+  height: 415px;
+  width: 300px;
+  border-radius: 2rem;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+  padding: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 25px;
+}
+
+#limpiar {
+  margin-left: 20px;
+  padding: 5px;
+  font-family: cursive;
+  font-size: 14px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  box-shadow: none !important;
+  background-color: rgb(216, 201, 201);
+  color: rgb(68, 67, 67);
+}
+
+.scramble{
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  width: 550px;
+  margin-top: 100px;
+  
+}
+.container-time-scramble{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
