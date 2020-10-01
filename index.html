@@ -130,17 +130,32 @@
 
         function scrambleOficial(array) {
 
-            for (i = 0; i < array.length - 1; i++) {
-                if (i > 0) {
-                    if ((array[i].charAt(0) ) == (array[i + 1].charAt(0)) && ((array[i + 1].charAt(0)) != (array[i - 2].charAt(0)))) {
+            for (i = 0; i < array.length -1 ; i++) {
+                if (i > 1) {
+                    if ((array[i].charAt(0)) == (array[i + 1].charAt(0)) && ((array[i + 1].charAt(0)) != (array[i - 2]
+                            .charAt(0)))) {
                         array[i] = array[i - 2];
                     }
-                    if ((array[i].charAt(0)) == (array[i + 1].charAt(0)) && ((array[i + 1].charAt(0) ) == (array[i - 2].charAt(0)))) {
-                        array[i] = array[i - 3];
+                    if ((array[i].charAt(0)) == (array[i + 1].charAt(0)) && ((array[i + 1].charAt(0)) == (array[i - 2]
+                            .charAt(0)))) {
+                        array[i] = array[i + 3];
                     }
-                    
-                } else {
-                    if ((array[i].charAt(0) ) == (array[i + 1].charAt(0))) {
+
+                }
+                else if (i == 1) {
+                    if ((array[i].charAt(0)) == (array[i + 1].charAt(0))){
+                        array[3] = array[14];
+                    }
+
+                } else if (i == 16) {
+                    if ((array[i].charAt(0)) == (array[i + 1].charAt(0))){
+                        array[i] = array[18];
+                        array[17] = array[i-1];
+                        array[18] = array[i];
+                    }
+
+                }  else {
+                    if ((array[i].charAt(0)) == (array[i + 1].charAt(0))) {
                         array[i] = array[i + 3];
                     }
                 }
@@ -148,10 +163,16 @@
 
             return array
         }
-        arr = ["R ", "R' ", "L ", "L' ", "D ", "D' ", "U ", "U' ", "F ", "F' ", "B ", "B' ", "R2 ", "L2 ", "D2 ", "U2 ", "F2 ", "B2 "];
+        arr = ["R ", "R' ", "L ", "L' ", "D ", "D' ", "U ", "U' ", "F ", "F' ", "B ", "B' ", "R2 ", "L2 ", "D2 ", "U2 ",
+            "F2 ", "B2 "
+        ];
         var mezcla = document.querySelector('.mezcla');
         var cade = "";
         var newArrr = barajar(arr)
+
+        console.log(newArrr)
+
+
         scrambleOficial(newArrr).forEach(elemente => {
             cade += elemente + " ";
         });
