@@ -128,10 +128,21 @@
             return array;
         }
 
+        function scrambleOficial(array) {
+
+            for (i = 0; i < array.length - 1; i++) {
+                if (array[i + 1].equals(array[i] + "'") || array[i + 1].equals(array[i] + "2")) {
+                    array[i] = array[i + 2];
+                }
+            }
+
+            return array
+        }
         arr = ["R", "R'", "L", "L'", "D", "D'", "U", "U'", "F", "F'", "B", "B'", "R2", "L2", "D2", "U2", "F2", "B2"];
         var mezcla = document.querySelector('.mezcla');
         var cade = "";
-        barajar(arr).forEach(elemente => {
+        var newArrr = barajar(arr)
+        scrambleOficial(newArrr).forEach(elemente => {
             cade += elemente + " ";
         });
         mezcla.innerHTML = cade;
